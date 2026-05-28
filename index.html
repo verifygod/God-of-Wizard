@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wizard God</title>
+
+    <!-- Wizard Schrift -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            margin: 0;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at top, #2b1d4a, #0d0d0d);
+
+            color: white;
+            font-family: 'MedievalSharp', cursive;
+        }
+
+        h1 {
+            text-align: center;
+
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            font-size: clamp(30px, 5vw, 60px);
+
+            color: #ffd700;
+
+            text-shadow:
+                0 0 10px #ffd700,
+                0 0 20px #ffae00;
+
+            padding: 0 20px;
+        }
+
+        .game-area {
+
+            position: relative;
+
+            width: 100vw;
+            height: 80vh;
+        }
+
+        img {
+
+            width: min(26vw, 200px);
+            height: min(26vw, 200px);
+
+            min-width: 110px;
+            min-height: 110px;
+
+            object-fit: cover;
+
+            position: absolute;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            border: 4px solid #444;
+
+            box-shadow:
+                0 0 15px rgba(255,255,255,0.2);
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s,
+                width 0.5s,
+                height 0.5s,
+                left 0.5s,
+                top 0.5s;
+        }
+
+        img:hover {
+
+            transform: scale(1.08);
+
+            border-color: #ffd700;
+
+            box-shadow:
+                0 0 25px gold;
+        }
+
+        /* Startpositionen */
+
+        #wizard1 {
+            left: 8%;
+            top: 30%;
+        }
+
+        #wizard2 {
+            left: 37%;
+            top: 30%;
+        }
+
+        #wizard3 {
+            left: 66%;
+            top: 30%;
+        }
+
+        #result {
+
+            position: absolute;
+
+            width: 100%;
+
+            bottom: 40px;
+
+            text-align: center;
+
+            font-size: clamp(28px, 5vw, 50px);
+
+            color: #ffd700;
+
+            text-shadow:
+                0 0 10px gold,
+                0 0 20px orange;
+
+            z-index: 10;
+
+            padding: 0 20px;
+        }
+
+        /* Mobile Layout */
+
+        @media (max-width: 700px) {
+
+            .game-area {
+                height: 75vh;
+            }
+
+            #wizard1 {
+                left: 8%;
+                top: 12%;
+            }
+
+            #wizard2 {
+                left: 38%;
+                top: 38%;
+            }
+
+            #wizard3 {
+                left: 65%;
+                top: 12%;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Who is the God of Wizard?</h1>
+
+    <div class="game-area">
+
+        <!-- RICHTIG -->
+        <img
+            id="wizard1"
+            src="Jonas_Wizard.jpeg"
+            onclick="correctAnswer()"
+        >
+
+        <!-- FALSCH -->
+        <img
+            id="wizard2"
+            src="Johannes_Wizard.jpeg"
+            onmouseenter="runAway(this)"
+            ontouchstart="runAway(this)"
+        >
+
+        <!-- FALSCH -->
+        <img
+            id="wizard3"
+            src="Tobias_Wizard.jpeg"
+            onmouseenter="runAway(this)"
+            ontouchstart="runAway(this)"
+        >
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+
+        function correctAnswer() {
+
+            const correctImage =
+                document.getElementById("wizard1");
+
+            // andere Bilder verstecken
+            document.getElementById("wizard2")
+                .style.display = "none";
+
+            document.getElementById("wizard3")
+                .style.display = "none";
+
+            // Bild groß machen
+            correctImage.style.width = "320px";
+            correctImage.style.height = "320px";
+
+            correctImage.style.left = "50%";
+            correctImage.style.top = "42%";
+
+            correctImage.style.transform =
+                "translate(-50%, -50%)";
+
+            correctImage.style.border =
+                "6px solid gold";
+
+            correctImage.style.boxShadow =
+                "0 0 40px gold";
+
+            // Antwort
+            document.getElementById("result")
+                .innerHTML =
+                "Wise Answer ⚡";
+        }
+
+        function runAway(element) {
+
+            const maxX =
+                window.innerWidth - 150;
+
+            const maxY =
+                window.innerHeight - 180;
+
+            const randomX =
+                Math.random() * maxX;
+
+            const randomY =
+                Math.random() * maxY;
+
+            element.style.left =
+                randomX + "px";
+
+            element.style.top =
+                randomY + "px";
+        }
+
+    </script>
+
+</body>
+</html>
